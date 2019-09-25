@@ -1,6 +1,7 @@
 (function () {
 
     const url = "http://jservice.io/api/random"
+    let score = 0
     let jsonResponse
 
     const asyncClueFetch = async () => {
@@ -58,7 +59,7 @@
 
             let submit = document.getElementById("submit")
             let value = document.getElementById("value").innerHTML = jsonResponse.value
-            let score = parseInt(document.getElementById("score").innerHTML, 10)
+            //parseInt(document.getElementById("score").innerHTML, 10)
             let answer = document.getElementById("answer")
 
             submit.disabled = true;
@@ -81,12 +82,30 @@
 
             if (response == ans) {
                 score += value;
+                if (score<0){
+                    document.getElementById("score").className='negative'
+                }
+                else if (score>0){
+                    document.getElementById("score").className='positive'
+                }
+                else {
+                    document.getElementById("score").className='neutral'
+                }
                 document.getElementById("score").innerHTML = score;
                 console.log("My score is" + score)
                 init();
             }
             else {
                 score -= value;
+                if (score<0){
+                    document.getElementById("score").className='negative'
+                }
+                else if (score>0){
+                    document.getElementById("score").className='positive'
+                }
+                else {
+                    document.getElementById("score").className='neutral'
+                }
                 document.getElementById("score").innerHTML = score;
                 console.log(score)
                 init();
